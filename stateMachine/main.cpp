@@ -29,7 +29,9 @@ namespace variables {
     unsigned short ushort_State;
     unsigned short ushort_timeCount; 
 }
+
 void stateMachine();
+
 int main() {
     
     unsigned short in1 = 0U;
