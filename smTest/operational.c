@@ -21,10 +21,6 @@ void operational(unsigned int b_FAIL) {
     {
         panelOpen();
     } 
-    
-    printf("\n PANEL %d",b_Panel);
-    printf("\n MODE %d",us_Mode);
-    printf("\n FAIL %d",b_FAIL);
 }
 
 void extend(unsigned int b_FAIL) {
