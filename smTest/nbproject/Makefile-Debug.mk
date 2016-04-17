@@ -35,9 +35,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/ibit.o \
+	${OBJECTDIR}/bit.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/maintenance.o \
+	${OBJECTDIR}/monitoring.o \
 	${OBJECTDIR}/operational.o \
 	${OBJECTDIR}/stateMachine.o
 
@@ -66,10 +67,10 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/smtest.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/smtest ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/ibit.o: ibit.c 
+${OBJECTDIR}/bit.o: bit.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ibit.o ibit.c
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/bit.o bit.c
 
 ${OBJECTDIR}/main.o: main.c 
 	${MKDIR} -p ${OBJECTDIR}
@@ -80,6 +81,11 @@ ${OBJECTDIR}/maintenance.o: maintenance.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/maintenance.o maintenance.c
+
+${OBJECTDIR}/monitoring.o: monitoring.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/monitoring.o monitoring.c
 
 ${OBJECTDIR}/operational.o: operational.c 
 	${MKDIR} -p ${OBJECTDIR}

@@ -4,17 +4,19 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Arquivos de Cabeçalho"
                    projectFiles="true">
-      <itemPath>ibit.h</itemPath>
+      <itemPath>bit.h</itemPath>
       <itemPath>maintenance.h</itemPath>
+      <itemPath>monitoring.h</itemPath>
       <itemPath>operational.h</itemPath>
       <itemPath>stateMachine.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Arquivos de Código-Fonte"
                    projectFiles="true">
-      <itemPath>ibit.c</itemPath>
+      <itemPath>bit.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>maintenance.c</itemPath>
+      <itemPath>monitoring.c</itemPath>
       <itemPath>operational.c</itemPath>
       <itemPath>stateMachine.c</itemPath>
     </logicalFolder>
@@ -44,15 +46,19 @@
       </toolsSet>
       <compileType>
       </compileType>
-      <item path="ibit.c" ex="false" tool="0" flavor2="0">
+      <item path="bit.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="ibit.h" ex="false" tool="3" flavor2="0">
+      <item path="bit.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="maintenance.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="maintenance.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="monitoring.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="monitoring.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="operational.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -83,15 +89,19 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="ibit.c" ex="false" tool="0" flavor2="0">
+      <item path="bit.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="ibit.h" ex="false" tool="3" flavor2="0">
+      <item path="bit.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="maintenance.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="maintenance.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="monitoring.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="monitoring.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="operational.c" ex="false" tool="0" flavor2="0">
       </item>

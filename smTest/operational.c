@@ -1,8 +1,28 @@
+/* 
+ * File:   operational.c
+ * Author: @DaniloGraca
+ *
+ * Created on 15 de Abril de 2016, 18:59
+ */
 
+/*
+ * 
+ */
 unsigned int b_Panel = 1U;
+
+/*
+ * 
+ */
 unsigned short us_Mode = 1U;
+
+/*
+ * 
+ */
 signed short ss_Position = 0U;
 
+/*
+ * 
+ */
 void operational(unsigned int b_FAIL) {
 
     if (us_Mode == 2U) 
@@ -23,6 +43,9 @@ void operational(unsigned int b_FAIL) {
     } 
 }
 
+/*
+ * 
+ */
 void extend(unsigned int b_FAIL) {
 
     if (b_FAIL == 1) 
@@ -42,6 +65,9 @@ void extend(unsigned int b_FAIL) {
     }
 }
 
+/*
+ * 
+ */
 void retract(unsigned int b_FAIL) {
     
     if (b_FAIL == 1) 
@@ -62,6 +88,9 @@ void retract(unsigned int b_FAIL) {
     }
 }
 
+/*
+ * 
+ */
 void panelClose() {
     
     //* Mode PANEL CLOSE 
@@ -72,6 +101,9 @@ void panelClose() {
     }
 }
 
+/*
+ * 
+ */
 void panelOpen() {
     
     //*Mode PANEL OPEN
@@ -82,6 +114,9 @@ void panelOpen() {
     }
 }
 
+/*
+ * 
+ */
 void shutdown(unsigned int b_FAIL){
 
     while(ss_Position != 0)

@@ -1,10 +1,12 @@
 build/Debug/MinGW-Windows/stateMachine.o: stateMachine.c stateMachine.h \
- ibit.h maintenance.h operational.h
+ bit.h maintenance.h operational.h monitoring.h
 
 stateMachine.h:
 
-ibit.h:
+bit.h:
 
 maintenance.h:
 
 operational.h:
+
+monitoring.h:
