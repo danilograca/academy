@@ -12,8 +12,10 @@
 extern "C" {
 #endif
 
-    int bit(void);
-
+/*
+ * Built-in Test
+ */
+int bit(void);
 
 #ifdef __cplusplus
 }

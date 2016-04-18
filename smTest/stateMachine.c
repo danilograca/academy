@@ -57,15 +57,16 @@ void sm_init() {
     b_On = 1U;
     b_Fail = 0U;
     b_Shutdown = 0U;
-    b_Operational = 1U;
+    b_Operational = 0U;
     b_Maintenance = 0U;
 }
 
 /*
- * State Machine Declaration
+ * State Machine
  */
 void sm_run() {
 
+    /* STANDBY STATE */
     if (us_State == 1U) 
     {
         if (b_On == 1U) 
@@ -81,9 +82,10 @@ void sm_run() {
     }
     else 
     {
+        /* OPERATIONAL STATE */
         if (us_State == 7U) 
         {
-            if (b_On == 1U) 
+            if (b_Operational == 1U) 
             {
                 /* Call OPERATIONAL state */
                 operational(b_Fail); 
@@ -105,29 +107,57 @@ void sm_run() {
                }
             }
             
+            /* Call Health Monitoring
+             * return: state if changed */
             us_State = monitoringPower(us_State);
         } 
+        
+        /* BIT STATE */
         else if (us_State == 2U) 
         {
+            /* Call Built-in Test */
             us_State = bit();
             
+            /* Call Health Monitoring
+             * return: state if changed */
             us_State = monitoringPower(us_State);
         }
+        
+        /* FAIL STATE */
         else if (us_State == 3U) 
         {
             /* Alert system to FAIL */
             b_Fail = 1U;
             
+             if (b_On == 0U) 
+            {
+                /*Change State to STANDBY*/
+                us_State = 1U;
+            }
+            
             if (b_Operational == 1U) 
             {
                 /* Change State to OPERATIONAL REDUCED */
-                us_State = 7U;    
+                us_State = 7U;
+                
+                /* Initialize operational variables */
+                operational_init();
             }
             
+            /* Call Health Monitoring
+             * return: state if changed */
             us_State = monitoringPower(us_State);
         }
+        
+        /* READY STATE */
         else if (us_State == 4U) 
         {
+            if (b_On == 0U) 
+            {
+                /*Change State to STANDBY*/
+                us_State = 1U;
+            }
+            
             if (b_Maintenance == 1U) 
             {
                 /*Change State to MAINTENANCE*/
@@ -138,10 +168,17 @@ void sm_run() {
             {
                 /*Change State to Operational*/
                 us_State = 7U;
+                
+                /* Initialize operational variables */
+                operational_init();
             }
             
+            /* Call Health Monitoring
+             * return: state if changed */
             us_State = monitoringPower(us_State);
         }
+        
+        /* MAINTENANCE STATE */
         else if (us_State == 6U) 
         {
             if (b_Maintenance == 0U) 
@@ -158,24 +195,41 @@ void sm_run() {
                 maintenance();
             }
             
+            /* Call Health Monitoring
+             * return: state if changed */
             us_State = monitoringPower(us_State);
         }
         else 
         {
+            /* EMERGENCY STATE */
             if (us_State == 9U) 
             {
-                /* Emergency Ative */
-                b_Emergency = 1U;
+                /* System Turn OFF */
+                b_On = 0;
+                
+                /* Set FAIL Alert to OFF */
+                b_Fail = 0;
 
-                /* Shutdown System Safely */
-                shutdown(b_Fail);
-
-                /* System on STANDBY */
+                /* Change state to STANDBY */
                 us_State = 1U;
 
-                /* Turn OFF */
-                b_On = 0;
+                /* Emergency Active */
+                b_Emergency = 1U;
+                
+                /* Operational OFF */
+                b_Operational = 0U;
+                
+                /* Shutdown System Safely */
+                shutdown(b_Fail);
             }
         }
     }
+    
+    printf("\nState - %d \n", us_State );
+    printf("On - %d \n", b_On );
+    printf("Fail - %d \n", b_Fail );
+    printf("Shutdown - %d \n", b_Shutdown );
+    printf("Emergency - %d \n", b_Emergency );
+    printf("Operational - %d \n", b_Operational );
+    printf("Maintenance - %d", b_Maintenance );
 }

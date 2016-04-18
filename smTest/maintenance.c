@@ -16,5 +16,5 @@ void maintenance() {
     /*
      * 
      */
-    printf(" :: M A I N T E N A N C E :: ");
+    printf(" :: M A I N T E N A N C E :: \n");
 }

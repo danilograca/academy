@@ -10,7 +10,7 @@
 /*
  * Time count 
  */
-unsigned long us_timeCount = 0;
+unsigned long us_timeCount;
 
 /*
  * Perform the Built-in Test
@@ -18,6 +18,9 @@ unsigned long us_timeCount = 0;
  */
 int bit() {
 
+    /* Start Counter */
+    us_timeCount = 0;
+    
     if (getPower() <= 200U) 
     {
         /* Change State to EMERGENCY */
@@ -37,6 +40,9 @@ int bit() {
         {
             /* Change State to READY */
             return 4U;
+            
+            /* ReStart Counter */
+            us_timeCount = 0;
         }
     }
 }

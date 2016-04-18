@@ -12,7 +12,10 @@
 extern "C" {
 #endif
 
-   int monitoringPower(int state); 
+    /*
+     * 
+     */
+    int monitoringPower(int state);
 
 #ifdef __cplusplus
 }

@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   teste.h
- * Author: Homine
+ * Author: @DaniloGraca
  *
  * Created on 21 de Março de 2016, 22:12
  */
@@ -18,15 +12,16 @@
 extern "C" {
 #endif
 
-/*
- * Initialize State Machine 
- */
-void sm_run (void);
+    /*
+     * Variables Initialize
+     */
+    void sm_init(void);
 
-/*
- * Initialize Variables of State Machine 
- */
-void sm_init (void);
+    /*
+     * Initialize State Machine 
+     */
+    void sm_run(void);
+
 
 #ifdef __cplusplus
 }

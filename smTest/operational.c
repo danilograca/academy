@@ -8,127 +8,155 @@
 /*
  * 
  */
-unsigned int b_Panel = 1U;
+unsigned int b_Panel;
 
 /*
  * 
  */
-unsigned short us_Mode = 1U;
+unsigned short us_Mode;
 
 /*
  * 
  */
-signed short ss_Position = 0U;
+signed short ss_Position;
+
+/*
+ * Initialize variables
+ */
+void operational_init(){
+    
+    b_Panel = 0U;
+    us_Mode = 1U;
+    ss_Position = 0U;
+}
 
 /*
  * 
  */
 void operational(unsigned int b_FAIL) {
 
-    if (us_Mode == 2U) 
+    if (us_Mode == 1U) 
+    {
+        panelClosed();
+    } 
+    else if (us_Mode == 2U) 
     {
         extend(b_FAIL);
     } 
-    else if (us_Mode == 4U) 
+    else if (us_Mode == 3U)
+    {
+        panelOpened();
+    } 
+    else if(us_Mode == 4U) 
     {
         retract(b_FAIL);
     } 
-    else if (us_Mode == 1U) 
-    {
-        panelClose();
-    } 
-    else if (us_Mode == 3U)
-    {
-        panelOpen();
-    } 
+    
+    printf("\nPanel - %d", b_Panel );
+    printf("\nMode - %d", us_Mode );
+    printf("\nPosition - %d", ss_Position );
+    
 }
 
 /*
- * 
+ * Mode to open the panel
  */
 void extend(unsigned int b_FAIL) {
 
     if (b_FAIL == 1) 
     {
-        // Mode EXTEND on REDUCED STATE
+        /* Mode EXTEND on REDUCED STATE */
         ss_Position += 1U;
     } 
     else 
     {
+        /* Mode EXTEND on OPERATIONAL STATE */
         ss_Position += 2U;
     }
 
     if (ss_Position > 20U) 
     {
-        // Change to mode PANEL OPEN
+        /* Change to mode PANEL OPEN */
         us_Mode = 3U;
     }
 }
 
 /*
- * 
+ * Mode to close the panel
  */
 void retract(unsigned int b_FAIL) {
     
     if (b_FAIL == 1) 
     {
-        // Mode RETRACT 
+        /* Mode RETRACT on REDUCED state */
         ss_Position -= 1U;
     } 
     else 
     {
-        // Mode RETRACT 
+        /* Mode RETRACT on OPERATIONAL state */
         ss_Position -= 2U;
     }
 
     if (ss_Position < 0) 
     {
-        //*Change to mode PANEL CLOSE
+        /* Change to mode PANEL CLOSED */
         us_Mode = 1U;
     }
 }
 
 /*
- * 
+ * Waiting with PANEL CLOSED
  */
-void panelClose() {
+void panelClosed() {
     
-    //* Mode PANEL CLOSE 
+    /* IF set panel to OPEN */
     if (b_Panel == 1U) 
     {
-        //* Change to mode EXTEND 
+        /* Change to mode EXTEND */
         us_Mode = 2U;
     }
 }
 
 /*
- * 
+ * Mode WAITING with PANEL OPENED
  */
-void panelOpen() {
+void panelOpened() {
     
-    //*Mode PANEL OPEN
+    /* Mode PANEL OPEN */
     if (b_Panel == 0) 
     {
-        //*Change to mode RETRACT
+        /* Change to mode RETRACT */
         us_Mode = 4U;
     }
 }
 
 /*
- * 
+ * Shutdown system safely
  */
 void shutdown(unsigned int b_FAIL){
 
-    while(ss_Position != 0)
+    /* Close the Panel before SHUTDOWN */
+    while(ss_Position > 0)
     {
         if (b_FAIL == 1) 
         {
-            // Mode EXTEND on REDUCED STATE
+            /* Close panel on REDUCED STATE */
             ss_Position -= 1U;
         } 
         else 
         {
+            /* Close panel on OPERATIONAL STATE */
             ss_Position -= 2U;
         }
     }
+    
+    /* Set panel to CLOSED */
+    b_Panel = 0;
+    
+    /* Set Mode to WAITING with PANEL CLOSED */
+    us_Mode = 1;
+    
+    printf("\nPanel - %d", b_Panel );
+    printf("\nMode - %d", us_Mode );
+    printf("\nPosition - %d", ss_Position );
 }

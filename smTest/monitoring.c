@@ -8,7 +8,7 @@
 /*
  * Storage Power from panel
  */
-unsigned short us_Power = 1000U;
+unsigned short us_Power = 100U;
 
 /*
  * Manage power
